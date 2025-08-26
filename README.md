@@ -1,5 +1,9 @@
-# SkillForge
+<p align="center">
+  <img src="public\images\logo.svg" alt="Skill Forge" width="330" height="300"/>
+</p>
 
+
+# SkillForge
 SkillForge is a web application designed to bridge the gap between education and workforce readiness. It empowers job seekers by providing tools to analyze resumes, identify skill gaps, and access resources for professional development. 
 
 ## Inspiration
