@@ -17,21 +17,25 @@ class Differences:
     def get_difference_in_skills(self, result, job_description):
         print(f"Job Description: {job_description.lower()}")
         self.current_skills = []
+
+        '''Get a list of required skills from job_description and the set of all skills'''
         self.required_skills = [skill.lower() for skill in self.all_Skills if skill.lower() in [job_description.lower()]]
-        #self.required_skills = [skill.lower() for skill in self.all_Skills]
+
         print(self.required_skills)
+
+        '''Retrieve all current skills from result and store in current_skills'''
+        skills = result['data']['skills']
+        for skill in skills:
+            self.current_skills.append(skill['name'].lower())
+
+        '''Find all skills that are missing from the required skillset '''
+        self.missing_skills = [skill for skill in self.required_skills if skill.lower() not in self.current_skills]
+
+
         if self.required_skills:
             self.percentage_of_skills_known = (len(self.current_skills) / len(self.required_skills)) * 100
         else:
             self.percentage_of_skills_known = 0
-        skills = result['data']['skills']
-        #print(f"skills: {skills}")
-        for skill in skills:
-            self.current_skills.append(skill['name'].lower())
-
-        #print(self.current_skills)
-        self.missing_skills = [skill for skill in self.required_skills if skill.lower() not in self.current_skills]
-
 
         return {
             "percentage_known": self.percentage_of_skills_known,
