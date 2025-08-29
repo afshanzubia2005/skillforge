@@ -72,17 +72,18 @@ The app will also provide:
 
 For example, if a pharmacy technician applies to Merck’s drug research and development team, SkillForge may prompt them to add "pill compounding" as a skill based on shared learning experiences from others in similar roles.
 
-## How to Run Backend (w/o Docker)
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
+# How to Run Backend (w/o Docker)
+Create virtual environment
+! python3 -m venv venv
+! source venv/bin/activate
 
-# Install dependencies (found in api folder)
-pip install -r requirements.txt
+Install dependencies (found in api folder)
+! pip install -r requirements.txt
 
 
-## How to Run Backend (api folder) WITH DOCKER:
-# Consult README.Docker.md within the api folder for instructions !!
+# How to Run Backend (api folder) WITH DOCKER:
+## Consult README.Docker.md within the api folder for instructions !!
 
-## Frontend Instruction
-# Install frontend dependencies (npm install) and then run it in development mode (npm run dev)
+# Frontend Instruction
+Install frontend dependencies (npm install) 
+Run in development mode (npm run dev)
