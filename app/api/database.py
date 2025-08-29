@@ -19,7 +19,13 @@ class DBConnection:
         self.pwd = os.getenv("MONGODB_PWD")
         self.uri = f"mongodb+srv://{self.user}:{self.pwd}@cluster0.djzqswt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
         self.client = MongoClient(self.uri, tlsCAFile=certifi.where(), server_api=ServerApi('1'))    
-    
+        self.db = self.client['Users']
+        self.collection = self.db['UserInfo']
+
+    def insert_a_user(self, user_data):
+        self.collection.insert_one(user_data)
+        print("Data successfully inserted!")
+
     ''' Needs to be re-implemented
     def insert_a_user(self, resume):
         #resposne is sent from fastapi when it makes a call
@@ -44,8 +50,20 @@ class DBConnection:
         except Exception as e:
             print(e)
 
+    def test_insert_user(self):
+        sample_user_data = {
+            "name": "Alice",
+            "age": 19,
+            "role": "student",
+            "college": "New York University",
+            "city": "New York"
+        }
+        self.collection.insert_one(sample_user_data)
+        print("Sample user data inserted!")
+
 #Code to run the connection test: 
 
 load_dotenv()
 database = DBConnection()
 database.test_connection()
+database.test_insert_user()
