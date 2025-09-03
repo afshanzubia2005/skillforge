@@ -5,15 +5,14 @@ from database import DBConnection
 from difference import Differences
 import os
 
-#db1 = DBConnection()
+#db1 = DBConnection() # Why is this line commented out?
 app = FastAPI()
 os.makedirs('uploads', exist_ok=True)
+
 
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the Skill Forge API"}
-
-
 
 @app.post("/api/parse-document")
 async def get_skills(job_description: str, file: UploadFile = File(...)):

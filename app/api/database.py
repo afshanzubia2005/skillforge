@@ -3,7 +3,7 @@
 
 import os
 from dotenv import load_dotenv
-
+import redis as r
 from pymongo.mongo_client import MongoClient
 import certifi # To avoid SSL Certificate Verification Error
 from pymongo.server_api import ServerApi
@@ -61,9 +61,22 @@ class DBConnection:
         self.collection.insert_one(sample_user_data)
         print("Sample user data inserted!")
 
-#Code to run the connection test: 
+    def test_redis_connection(self):
+        try:
+            print(redis.ping())
+            print("Test Passed! Connected to Redis!")
+        except Exception as e:
+            print("Test failed. Failed to connect to Redis.")
 
+#Code to run the connection test: 
+#If testing 1 method, comment out the others.
+
+#Test MongoDB
 load_dotenv()
 database = DBConnection()
 database.test_connection()
 database.test_insert_user()
+
+#Test Redis
+redis = r.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=0)
+database.test_redis_connection()

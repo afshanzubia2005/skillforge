@@ -20,7 +20,7 @@ def test_find_missing_skills():
     return False
 
 if (test_find_missing_skills()):
-    print("Test 1 passed!")
+    print("Test 1: finding_missing_skills() passed!")
 else:
-    print("Test 1 failed.")
+    print("Test 1: finding_missing_skills() failed.")
 

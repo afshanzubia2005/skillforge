@@ -1,4 +1,4 @@
-from pdfparser import find_missing_skills
+from pdfparser import fetch_topic_summary, find_missing_skills
 
 class Differences:
     def __init__(self):
@@ -42,7 +42,29 @@ class Differences:
             "missing_skills": self.missing_skills
     
         }
+    def get_missing_skills(self):
+        '''
+        This function returns the list of missing skills.
+        '''
+        return self.missing_skills
 
+    def get_percentage_of_skills_missing(self):
+        '''
+        This function returns the percentage of skills that are missing.
+        '''
+        return self.percentage_of_skills_missing
+    
+    
+    # Needs to be implemented + tidied up
+    def display_skills_summary(dict):
 
+    # This function takes a dictionary of skills and displays their summaries.
+    # dict is the list that is returned by get_difference_in_skills method from Differences class (differnece.py)
+        final_dict = {}
+        for skill in dict:
+            final_dict[skill] = fetch_topic_summary(skill)
 
-            
+        return final_dict
+    
+    
+
