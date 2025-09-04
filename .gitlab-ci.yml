@@ -7,8 +7,8 @@ build-job:
   image: python:3.11
   script:
     - echo "Hello, $GITLAB_USER_LOGIN!"
-    - virtualenv venv
-    - source ./venv/bin/activate
+    - python -m venv app/api/venv
+    - source app/api/venv/bin/activate
     - pip install -r app/api/requirements.txt
   retry: 
   after_script:
