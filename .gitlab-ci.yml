@@ -7,7 +7,7 @@ build-job:
   image: python:3.11
   script:
     - echo "Hello, $GITLAB_USER_LOGIN!"
-    - pip install -r requirements.txt
+    - pip install -r app/api/requirements.txt
   retry: 
   after_script:
     - echo "(Gitlab) Build job finished!"
