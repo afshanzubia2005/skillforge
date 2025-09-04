@@ -7,10 +7,7 @@ build-job:
   image: python:3.11
   script:
     - echo "Hello, $GITLAB_USER_LOGIN!"
-    - python -m venv venv
-    - source venv/bin/activate
     - pip install -r app/api/requirements.txt
-  retry: 
   after_script:
     - echo "(Gitlab) Build job finished!"
 
@@ -18,6 +15,7 @@ test-job1:
   stage: test
   image: python:3.11
   script:
+    - pip install -r app/api/requirements.txt
     - output=$(python3 app/api/tester.py)
     - echo "$output"
     - echo "$output" | grep -qE "Cache miss! Fetching resume text from PDF.|Cache hit! Missing skills found in Redis." || exit 1
