@@ -15,8 +15,7 @@ test-job1:
   stage: test
   image: python:3.11
   script:
-    - pip install -r app/api/requirements.txt
-    - output=$(python3 app/api/tester.py)
+    pip install -r app/api/requirements.txt    - output=$(python3 app/api/tester.py)
     - echo "$output"
     - echo "$output" | grep -qE "Cache miss! Fetching resume text from PDF.|Cache hit! Missing skills found in Redis." || exit 1
   retry: 2

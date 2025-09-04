@@ -3,7 +3,7 @@ from pdfparser import find_missing_skills
 """Test 1: the ability to search for a skill existing within resume"""
 
 def test_find_missing_skills():
-    resume_path = "../../public/files/ankush.pdf"
+    resume_path = "app/api/files/ankush.pdf"
     skills_to_search = ["Python", "Docker", "Flutter", "Dart"]
 
     result = find_missing_skills(skills_to_search, resume_path) 

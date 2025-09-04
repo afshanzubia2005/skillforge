@@ -1,6 +1,7 @@
 import requests
 import os
 import pdfplumber
+import redis
 
 def parse_pdf(filepath):
 	url = "https://api.affinda.com/v1/resumes/"
@@ -43,18 +44,34 @@ def fetch_topic_summary(topic):
 	
 
 def find_missing_skills(wordlist, pdf_path):
-	'''Finds all the missing skills in the wordList that are not present in the resume (pdfpath)'''
-	pdf = pdfplumber.open(pdf_path)
+	'''Finds all the missing skills in the wordList that are not present in the resume 
+	provided in the path (pdfpath)'''
+
+	r = redis.Redis(host = 'localhost', port = 6379, db = 0) #First database is being used
+	#If Unable to get a cache hit with pdf_path, then open the pdf_path 
+	# with pdf_plumber, retrieve resume content by page and
+	# add the resume contents to cache 
+	if r.get(f"{pdf_path}"):
+		resume_text = r.get(f"{pdf_path}").decode("utf-8")
+		print("Cache hit! Missing skills found in Redis.")
+	else:
+		print("Cache miss! Fetching resume text from PDF.")
+		resume_text = ""
+		pdf = pdfplumber.open(pdf_path)
+		for page in pdf.pages:
+			resume_text += page.extract_text_simple()
+		r.set(f"{pdf_path}", resume_text) #Upload all the resume text info to Redis w/ key as pdf_path
+	
+		
 	missing_skills = []
+
+	if missing_skills is None:
+		missing_skills = []
 
 	for word in wordlist:
 		found = False
-		for page in pdf.pages:
-			text = page.extract_text_simple()
-			if word.lower() in text.lower():
-				found = True
-				break
-
+		if word.lower() in resume_text.lower():
+			found = True
 		if not found:
 			missing_skills.append(word)
 
