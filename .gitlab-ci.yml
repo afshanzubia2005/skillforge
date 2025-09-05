@@ -1,7 +1,6 @@
 stages:
   - build
   - test
-  - deploy
 
 build-job:
   stage: build
@@ -25,10 +24,3 @@ test-job1:
   after_script:
     - echo "(Gitlab) Test Job 1 finished!"
 
-deploy_job:
-  stage: deploy
-  image: python:3.11
-  script:
-
-  after_script:
-    - echo "(Gitlab) Deploy job finished!"
