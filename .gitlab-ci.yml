@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 
 build-job:
   stage: build
@@ -17,9 +18,17 @@ test-job1:
   script:
     - pip install -r requirements.txt
     - output=$(python3 app/api/tester.py)
+    - docker compose up --build
     - echo "$output"
     - echo "$output" | grep -qE "Cache miss! Fetching resume text from PDF.|Cache hit! Missing skills found in Redis." || exit 1
   retry: 2
   after_script:
     - echo "(Gitlab) Test Job 1 finished!"
 
+deploy_job:
+  stage: deploy
+  image: python:3.11
+  script:
+
+  after_script:
+    - echo "(Gitlab) Deploy job finished!"
