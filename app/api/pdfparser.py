@@ -82,7 +82,3 @@ def upload_pdf_to_public_folder(pdf_path):
     
 	return pdf_path
 
-def extract_skill_list_from_job_description(job_description):
-	# Implement
-    # A simple extraction logic (this can be improved with NLP techniques)
-	pass
