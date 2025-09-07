@@ -1,16 +1,17 @@
 stages:
   - build
   - test
+  - deploy
 
 
 build-job:
   stage: build
   image: python:3.11
   script:
-    - source app/api/venv/bin/activate
-    - pip install -r requirements.txt
+    - python -m venv venv
+    - venv/bin/pip install -r requirements.txt
     - echo "Hello, $GITLAB_USER_LOGIN!"
-    - flake8 > style_logs.txt
+    - venv/bin/flake8 > style_logs.txt
   after_script:
     - echo "(Gitlab) Build job finished!"
 
@@ -26,3 +27,8 @@ test-job1:
   after_script:
     - echo "(Gitlab) Test Job 1 finished!"
 
+deploy_job:
+  stage: deploy
+  image: python:3.11
+  script:
+    - docker compose up --build
