@@ -11,7 +11,7 @@ build-job:
     - python -m venv venv
     - venv/bin/pip install -r requirements.txt
     - echo "Hello, $GITLAB_USER_LOGIN!"
-    - venv/bin/flake8 > style_logs.txt
+    - venv/bin/flake8
   after_script:
     - echo "(Gitlab) Build job finished!"
 
