@@ -16,9 +16,10 @@ test-job1:
   stage: test
   image: python:3.11
   script:
+    - source app/api/venv/bin/activate
     - pip install -r requirements.txt
-    - output=$(python3 app/api/test_unittest.py)
-    - echo "$output"
+    - cd ../..
+    - pytest
   retry: 2
   after_script:
     - echo "(Gitlab) Test Job 1 finished!"
