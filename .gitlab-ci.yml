@@ -16,6 +16,7 @@ test-job1:
   stage: test
   image: python:3.11
   script:
+    - pip install -r requirements.txt
     - output=$(python3 app/api/test_unittest.py)
     - docker compose up --build
     - echo "$output"
