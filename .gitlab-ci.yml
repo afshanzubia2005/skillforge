@@ -32,4 +32,5 @@ deploy_job:
   stage: deploy
   image: python:3.11
   script:
+    - cd app/api
     - docker compose up --build
