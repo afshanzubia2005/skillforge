@@ -89,5 +89,5 @@ Install frontend dependencies (npm install)
 Run in development mode (npm run dev)
 
 ## Pushing Updates
-git push origin main --> Pushes to gitlab
-git push --mirror github --> Mirrors changes to github
+1) git push origin main --> Pushes to gitlab
+2) git push --mirror github --> Mirrors changes to github
