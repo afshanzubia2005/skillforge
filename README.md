@@ -87,3 +87,7 @@ Install dependencies (found in api folder)
 ## Frontend Instruction
 Install frontend dependencies (npm install) 
 Run in development mode (npm run dev)
+
+## Pushing Updates
+git push origin main --> Pushes to gitlab
+git push --mirror github --> Mirrors changes to github
